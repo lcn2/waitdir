@@ -1,10 +1,10 @@
-#!/bin/sh -
+#!/bin/bash -
 #
 # waitdir - wait for a directory to exist
 #
-# @(#) $Revision$
-# @(#) $Id$
-# @(#) $Source$
+# @(#) $Revision: 1.1 $
+# @(#) $Id: waitdir.sh,v 1.1 2011/05/06 01:55:53 chongo Exp chongo $
+# @(#) $Source: /usr/local/src/cmd/waitdir/RCS/waitdir.sh,v $
 #
 # Copyright (c) 2011 by Landon Curt Noll.  All Rights Reserved.
 #
