@@ -2,8 +2,8 @@
 #
 # waitdir - wait for a directory to exist
 #
-# @(#) $Revision: 1.1 $
-# @(#) $Id: waitdir.sh,v 1.1 2011/05/06 01:55:53 chongo Exp chongo $
+# @(#) $Revision: 1.2 $
+# @(#) $Id: waitdir.sh,v 1.2 2011/05/06 02:04:27 chongo Exp chongo $
 # @(#) $Source: /usr/local/src/cmd/waitdir/RCS/waitdir.sh,v $
 #
 # Copyright (c) 2011 by Landon Curt Noll.  All Rights Reserved.
@@ -30,10 +30,11 @@
 #
 # Share and enjoy! :-)
 
-USAGE="usage $0 [-s sec] [-v] dir ..."
-S_FLAG=16
+USAGE="usage $0 [-s sec] [-m max] [-v] dir ..."
+S_FLAG=5
+M_FLAG=
 V_FLAG=
-set -- `/usr/bin/getopt s:v $*`
+set -- `/usr/bin/getopt s:m:v $*`
 if [ $? != 0 ]; then
     echo "$0: unknown or invalid -flag" 1>&2
     echo $USAGE 1>&2
@@ -42,22 +43,32 @@ fi
 for i in $*; do
     case "$i" in
     -s) S_FLAG="$2"; ;;
+    -m) M_FLAG="$2"; ;;
     -v) V_FLAG=true; ;;
     --) shift; break ;;
     esac
     shift
 done
-if [ $# -lt 1 ]; then
+if [[ $# -lt 1 ]]; then
     echo "$0: must have at least one arg" 1>&2
     echo $USAGE 1>&2
     exit 2
+fi
+
+# check max and setup interval
+#
+if [[ -n $M_FLAG ]]; then
+    if [[ "$S_FLAG" -gt "$M_FLAG" ]]; then
+	echo "$0: sec ($S_FLAG) is greater tham max ($M_FLAG)" 1>&2
+	exit 3
+    fi
 fi
 
 # loop until we find a directory
 #
 while :; do
 
-   # Look for a directory 
+   # Look for a directory
    #
    for i in $@; do
 
@@ -88,5 +99,22 @@ while :; do
    if [[ -n "$V_FLAG" ]]; then
 	echo
    fi
+
+   # If we have a max, increase the interval until max
+   #
+   if [[ -n "$M_FLAG" ]]; then
+       ((new = S_FLAG * 5 / 4))
+       if [[ "$new" -le "$S_FLAG" ]]; then
+	    ((S_FLAG++))
+       elif [[ "$new" -gt "$M_FLAG" ]]; then
+	    S_FLAG="$M_FLAG"
+       else
+	    S_FLAG="$new"
+       fi
+    fi
 done
+
+# we should not be here
+#
+echo "$0: exited infinite loop!" 1>&2
 exit 3
