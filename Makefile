@@ -3,9 +3,9 @@
 #
 # waitdir - wait for a directory to exist
 #
-# @(#) $Revision$
-# @(#) $Id$
-# @(#) $Source$
+# @(#) $Revision: 1.1 $
+# @(#) $Id: Makefile,v 1.1 2011/05/06 01:55:53 chongo Exp root $
+# @(#) $Source: /usr/local/src/bin/waitdir/RCS/Makefile,v $
 #
 # Copyright (c) 2011 by Landon Curt Noll.  All Rights Reserved.
 #
@@ -36,7 +36,7 @@ SHELL= /bin/sh
 CC= cc
 CFLAGS= -O3 -g3
 
-TOPNAME= cmd
+TOPNAME= bin
 INSTALL= install
 
 DESTDIR= /usr/local/bin
