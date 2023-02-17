@@ -1,13 +1,8 @@
-#!/bin/make
-# @(#)Makefile	1.2 04 May 1995 02:06:57
+#!/usr/bin/env make
 #
 # waitdir - wait for a directory to exist
 #
-# @(#) $Revision: 1.2 $
-# @(#) $Id: Makefile,v 1.2 2015/09/06 06:58:46 root Exp $
-# @(#) $Source: /usr/local/src/bin/waitdir/RCS/Makefile,v $
-#
-# Copyright (c) 2011 by Landon Curt Noll.  All Rights Reserved.
+# Copyright (c) 2011,2023 by Landon Curt Noll.  All Rights Reserved.
 #
 # Permission to use, copy, modify, and distribute this software and
 # its documentation for any purpose and without fee is hereby granted,
@@ -32,9 +27,12 @@
 # Share and enjoy! :-)
 
 
-SHELL= /bin/sh
+SHELL= bash
 CC= cc
 CFLAGS= -O3 -g3
+RM= rm
+CP= cp
+CHMOD= chmod
 
 TOPNAME= bin
 INSTALL= install
@@ -46,9 +44,9 @@ TARGETS= waitdir
 all: ${TARGETS}
 
 waitdir: waitdir.sh
-	rm -f $@
-	cp waitdir.sh $@
-	chmod 0555 $@
+	${RM} -f $@
+	${CP} waitdir.sh $@
+	${CHMOD} 0555 $@
 
 configure:
 	@echo nothing to configure
@@ -56,7 +54,7 @@ configure:
 clean quick_clean quick_distclean distclean:
 
 clobber quick_clobber: clean
-	rm -f waitdir
+	${RM} -f waitdir
 
 install: all
 	${INSTALL} -m 0555 ${TARGETS} ${DESTDIR}
