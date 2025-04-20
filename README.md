@@ -15,20 +15,21 @@ sudo make install
 # Examples
 
 ```sh
-/usr/local/bin/waitdir /tmp/somedir ; some_command /tmp/somedir
+$ /usr/local/bin/waitdir /tmp/somedir ; some_command /tmp/somedir
 ```
 
 ```sh
-/usr/local/bin/waitfile -m 120 /tmp/foo ; some_command /tmp/foo
+$ /usr/local/bin/waitfile -m 120 /tmp/foo ; some_command /tmp/foo
 ```
 
 
 # usage
 
+
 ## waitdir
 
 ```
-usage: waitdir [-h] [-v level] [-V] [-n] [-s sec] [-m max] dir ...
+/usr/local/bin/waitdir [-h] [-v level] [-V] [-n] [-s sec] [-m max] dir ...
 
     -h          print help message and exit
     -v level    set verbosity level (def level: 0)
@@ -53,10 +54,11 @@ Exit codes:
 waitdir version: 1.3.1 2025-03-23
 ```
 
+
 ## waitfile
 
 ```
-usage: waitfile [-h] [-v level] [-V] [-n] [-s sec] [-m max] file ...
+/usr/local/bin/waitfile [-h] [-v level] [-V] [-n] [-s sec] [-m max] file ...
 
     -h          print help message and exit
     -v level    set verbosity level (def level: 0)
